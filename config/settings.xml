@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class>
+    <configuration name="startup_settings">
+        <database>postgres</database>
+        <models>true</models>
+        <controllers>true</controllers>
+        <configs>false</configs>
+        <input>input/test_script.sql</input>
+        <projectPackage>com.daniel.test</projectPackage>
+    </configuration>
+</class>
