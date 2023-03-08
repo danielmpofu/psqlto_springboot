@@ -4,7 +4,42 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f7629d58-b8a5-45bd-aaad-9224d3718335" name="Changes" comment="A simple project to convert an SQL Schema to a spring boot api with rest controllers, models and entities" />
+    <list default="true" id="f7629d58-b8a5-45bd-aaad-9224d3718335" name="Changes" comment="A simple project to convert an SQL Schema to a spring boot api with rest controllers, models and entities">
+      <change afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/output.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/test/src/main/java/com/daniel/test/TestApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/test/src/main/java/com/daniel/test/entities/Address.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/test/src/main/java/com/daniel/test/entities/BankingDetail.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/test/src/main/java/com/daniel/test/entities/Certificate.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/test/src/main/java/com/daniel/test/entities/Contact.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/test/src/main/java/com/daniel/test/entities/IdDocument.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/test/src/main/java/com/daniel/test/entities/Institution.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/test/src/main/java/com/daniel/test/entities/MediaFile.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/test/src/main/java/com/daniel/test/entities/PeopleRelationship.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/test/src/main/java/com/daniel/test/entities/ProofOfRes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/test/src/main/java/com/daniel/test/models/Address.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/test/src/main/java/com/daniel/test/models/BankingDetail.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/test/src/main/java/com/daniel/test/models/Certificate.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/test/src/main/java/com/daniel/test/models/Contact.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/test/src/main/java/com/daniel/test/models/IdDocument.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/test/src/main/java/com/daniel/test/models/Institution.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/test/src/main/java/com/daniel/test/models/MediaFile.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/test/src/main/java/com/daniel/test/models/PeopleRelationship.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/test/src/main/java/com/daniel/test/models/ProofOfRes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/util/FileCodder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/FileCodder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pojo/StartupConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pojo/StartupConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/util/FileCodder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/util/FileCodder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/util/PgSqlReader.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/util/PgSqlReader.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/util/XmlParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/util/XmlParser.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -31,24 +66,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Downloaded.Files.Path.Enabled": "false",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last.edited.regexp": "",
-    "last_opened_file_path": "C:/Users/LENOVO/IdeaProjects/pg_sql_tool/output",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last.edited.regexp&quot;: &quot;&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/danieltmpofu/Documents/test/psqlto_springboot&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\LENOVO\IdeaProjects\pg_sql_tool\src\jar" />
@@ -59,8 +98,20 @@
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="17" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="pg_sql_tool" />
+      <extension name="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
+        </ENTRIES>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -80,6 +131,8 @@
       <option name="presentableId" value="Default" />
       <updated>1661948510717</updated>
       <workItem from="1661948512716" duration="40896000" />
+      <workItem from="1678279209743" duration="884000" />
+      <workItem from="1678280177910" duration="623000" />
     </task>
     <task id="LOCAL-00001" summary="A simple project to convert an SQL Schema to a spring boot api with rest controllers, models and entities">
       <created>1662040196307</created>

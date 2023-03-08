@@ -1,4 +1,4 @@
-import org.jetbrains.annotations.NotNull;
+
 import pojo.StartupConfig;
 import util.PgSqlReader;
 import util.XmlParser;
@@ -28,7 +28,7 @@ public class Main {
 
 
 
-    private  static void logConfig(@NotNull StartupConfig config){
+    private  static void logConfig( StartupConfig config){
         System.out.println("config db name: " + config.getDatabaseName());
         System.out.println("config do controllers: " + config.isGenerateControllers());
         System.out.println("config do models: " + config.isGenerateModel());

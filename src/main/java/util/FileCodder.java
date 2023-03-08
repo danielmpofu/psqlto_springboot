@@ -13,34 +13,39 @@ import java.nio.file.Paths;
 
 public class FileCodder {
 
-    private final String input;
-    private final String className;
-    private final String filePath;
-
     public FileCodder(String input, String className) throws Exception {
-        this.input = input;
-        this.className = className.trim();
+        String className1 = className.trim();
 
         XmlParser xmlParser = new XmlParser();
         StartupConfig config = xmlParser.readConfig();
         String projectName = config.getProjectPackage();
         String[] p = projectName.split("[.]");
 
-        String parentDir = "output\\" + p[2] + "\\";
-        String codeDir = "src\\main\\java\\" + p[0] + "\\" + p[1] + "\\" + p[2]+"\\";
+        String parentDir = File.separator+"output" + p[2] + File.separator;
+        String codeDir = "src" + File.separator
+                + "main"
+                + File.separator
+                + "java"
+                + File.separator
+                + p[0]
+                + File.separator
+                +  p[1]
+                + File.separator
+                + p[2]
+                + File.separator;
 
         String fileDir = "";
         Path path;
 
         if (input.contains("@RequestMapping")) {
-            fileDir = "controllers\\";
+            fileDir = "controllers"+ File.separator;
         } else if (input.contains("@Entity")) {
-            fileDir = "entities\\";
+            fileDir = "entities"+ File.separator;
         } else {
-            fileDir = "models\\";
+            fileDir = "models"+ File.separator;
         }
 
-        filePath = parentDir + codeDir + fileDir;
+        String filePath = parentDir + codeDir + fileDir;
 
         path = Paths.get(filePath);
         Files.createDirectories(path);
@@ -48,14 +53,14 @@ public class FileCodder {
                 + config.getProjectPackage()
                 + "." + fileDir
                 + ";\n\n")
-                .replace("\\", "");
+                .replace(File.separator, "");
 
         String javaCode = packageName+input;
         String fileNameAndPath = filePath + className.trim() + ".java";
         createFile(fileNameAndPath);
 
         writeJavaFile(javaCode, fileNameAndPath);
-        createMainFile(parentDir + codeDir + "\\");
+        createMainFile(parentDir + codeDir + File.separator);
     }
 
     private void createMainFile(String filePath) throws Exception {
