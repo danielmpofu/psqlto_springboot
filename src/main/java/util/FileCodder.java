@@ -2,6 +2,7 @@ package util;
 
 
 import org.apache.commons.lang3.StringUtils;
+import pojo.ProjectFile;
 import pojo.StartupConfig;
 
 import java.io.File;
@@ -10,6 +11,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.List;
 
 public class FileCodder {
 
@@ -157,8 +160,6 @@ public class FileCodder {
     }
 
     public FileCodder(String input, String className) throws Exception {
-        String className1 = className.trim();
-
         xmlParser = new XmlParser();
         config = xmlParser.readConfig();
         projectName = config.getProjectPackage();
@@ -182,7 +183,7 @@ public class FileCodder {
 
         //check and see where each file belongs here
         if (input.contains("@RequestMapping")) {
-            fileDir = "controllers" + File.separator;
+            fileDir = "controller" + File.separator;
         } else if (input.contains("@Entity")) {
             fileDir = "entities" + File.separator;
         } else if (input.contains("<?xml")) {
@@ -208,9 +209,26 @@ public class FileCodder {
         writeFileContents(javaCode, fileNameAndPath);
         createMainFile(parentDir + codeDir + File.separator);
 
+        ProjectFile projectFile = new ProjectFile();
+        projectFile.setFileName(className.trim()+".java");
+        projectFile.setClassName(className.trim());
+        projectFile.setContents("");
+        projectFile.setPackageName(packageName);
+
         generateSupportFiles(parentDir);
         generateTestsFolder(parentDir);
         generateResourcesFolder(parentDir);
+
+        createController(projectFile,parentDir +codeDir);
+    }
+
+    private void createController(ProjectFile projectFile, String parentDir)  throws Exception{
+        String controllerPath = parentDir + "controller";
+        Files.createDirectories(Paths.get(controllerPath));
+        ControllerGenerator controllerGenerator = new ControllerGenerator(projectFile);
+        String fileNameAndPath = controllerPath+File.separator+projectFile.getFileName().replace(".java","Controller.java");
+        createFile(fileNameAndPath);
+        writeFileContents(controllerGenerator.getControllerBody(),fileNameAndPath);
     }
 
 

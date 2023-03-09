@@ -5,20 +5,56 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f7629d58-b8a5-45bd-aaad-9224d3718335" name="Changes" comment="A simple project to convert an SQL Schema to a spring boot api with rest controllers, models and entities">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/util/SupportFilesInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_projectlombok_lombok_1_18_26.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pojo/ProjectFile.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/util/ControllerGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore 2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/config/settings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/demo/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/demo/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/demo/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/demo/.idea/jpa-buddy.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/demo/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/demo/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/demo/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/demo/src/demo.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/demo/src/main/java/com/pgtosqlapp/demo/DemoApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/demo/src/main/java/com/pgtosqlapp/demo/entities/Address.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/demo/src/main/java/com/pgtosqlapp/demo/entities/BankingDetail.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/demo/src/main/java/com/pgtosqlapp/demo/entities/Certificate.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/demo/src/main/java/com/pgtosqlapp/demo/entities/Contact.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/demo/src/main/java/com/pgtosqlapp/demo/entities/IdDocument.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/demo/src/main/java/com/pgtosqlapp/demo/entities/Institution.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/demo/src/main/java/com/pgtosqlapp/demo/entities/MediaFile.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/demo/src/main/java/com/pgtosqlapp/demo/entities/PeopleRelationship.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/demo/src/main/java/com/pgtosqlapp/demo/entities/ProofOfRes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/demo/src/main/java/com/pgtosqlapp/demo/models/Address.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/demo/src/main/java/com/pgtosqlapp/demo/models/BankingDetail.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/demo/src/main/java/com/pgtosqlapp/demo/models/Certificate.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/demo/src/main/java/com/pgtosqlapp/demo/models/Contact.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/demo/src/main/java/com/pgtosqlapp/demo/models/IdDocument.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/demo/src/main/java/com/pgtosqlapp/demo/models/Institution.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/demo/src/main/java/com/pgtosqlapp/demo/models/MediaFile.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/demo/src/main/java/com/pgtosqlapp/demo/models/PeopleRelationship.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/demo/src/main/java/com/pgtosqlapp/demo/models/ProofOfRes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/demo/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/demo/src/main/resources/static/init.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/demo/src/main/resources/templates/init.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/demo/src/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/demo/src/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/demo/src/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/demo/src/readme.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/demo/src/test/java/com/pgtosqlapp/demo/DemoApplicationTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pg_sql_tool.iml" beforeDir="false" afterPath="$PROJECT_DIR$/pg_sql_tool.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom 2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pojo/StartupConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pojo/StartupConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/util/FileCodder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/FileCodder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/util/PgSqlReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/PgSqlReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/util/XmlParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/XmlParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/pojo/StartupConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pojo/StartupConfig.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/util/FileCodder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/util/FileCodder.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/util/PgSqlReader.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/util/PgSqlReader.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/util/XmlParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/util/XmlParser.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +148,7 @@
       <updated>1661948510717</updated>
       <workItem from="1661948512716" duration="40896000" />
       <workItem from="1678279209743" duration="884000" />
-      <workItem from="1678280177910" duration="17131000" />
+      <workItem from="1678280177910" duration="27767000" />
     </task>
     <task id="LOCAL-00001" summary="A simple project to convert an SQL Schema to a spring boot api with rest controllers, models and entities">
       <created>1662040196307</created>

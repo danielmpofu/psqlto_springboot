@@ -2,32 +2,22 @@ package util;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.CaseUtils;
+import pojo.ProjectFile;
 import pojo.StartupConfig;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 public class PgSqlReader {
     private final String filePath;
-    XmlParser xmlParser;
+
     StartupConfig config;
-    String projectName;
-    String[] packageNameSplit;
-    private final String entityImports =
-            "import java.util.Objects;\n" +
-            "import javax.persistence.Entity;\n" +
-            "import javax.persistence.GeneratedValue;\n" +
-            "import javax.persistence.Id;\n";
 
     public PgSqlReader(String filePath) throws Exception {
-
-        xmlParser = new XmlParser();
-        config = xmlParser.readConfig();
-        projectName = config.getProjectPackage();
-        packageNameSplit = projectName.split("[.]");
-
+        config = new XmlParser().readConfig();
         this.filePath = filePath;
     }
 
@@ -99,7 +89,6 @@ public class PgSqlReader {
         return stringBuilder.toString();
     }
 
-
     public void createPOJO(List<String> createStatements, boolean isEntity) throws Exception {
 
         for (int i = 0; i < createStatements.size(); i++) {
@@ -114,17 +103,30 @@ public class PgSqlReader {
             String[] classFieldsArray = classFields.split(",");
 
             StringBuilder classData = new StringBuilder();
-            if (isEntity) {
-                classData.append(entityImports);
-                classData.append("@Entity\n");
-            }
+
+
+
+            classData.append(config.isUseLombok() ? "\nimport lombok.Data;\n" : "");
+            StringBuilder classImports = new StringBuilder();
+            String entityImports = "import java.util.Objects;\n" +
+                    "import javax.persistence.Entity;\n" +
+                    "import javax.persistence.GeneratedValue;\n" +
+                    "import javax.persistence.Id;\n";
+
+            classImports.append(isEntity ? entityImports : "");
+
+            classData.append(entityImports);
+            classData.append(isEntity ? "@Entity\n" : "");
+            classData.append(config.isUseLombok() ? "@Data\n" : "");
+
             classData.append("public class ").append(className.trim()).append("\n{");
 
             for (String s : classFieldsArray) {
-
                 classData.append(createVariables(s, isEntity));
             }
             classData.append("}");
+
+
 
             new FileCodder(classData.toString(), StringUtils.capitalize(className));
 
@@ -167,27 +169,41 @@ public class PgSqlReader {
                     "@Column(name = \"").append(fieldName).append("\", nullable = false) \n");
         }
 
-        fieldNameDeclaration.append("private ");
-
-        //looking for the appropriate java data type from the given sql data types
-        if (fieldType.equalsIgnoreCase("varchar") || fieldType.equalsIgnoreCase("text")) {
-            fieldNameDeclaration.append("String ");
-            variableDataType = "String ";
-        } else if (fieldType.equalsIgnoreCase("int") || fieldType.equalsIgnoreCase("serial")) {
-            fieldNameDeclaration.append("int ");
-            variableDataType = "int ";
-        } else if (fieldType.equalsIgnoreCase("bool")) {
-            fieldNameDeclaration.append("boolean ");
-            variableDataType = "boolean ";
-        }
+        fieldNameDeclaration
+                .append("private ")
+                .append(determineVariableType(fieldType));
+        variableDataType = determineVariableType(fieldType);
 
         fieldNameDeclaration.append(underscoreToCamelCase(fieldName, false));
         //terminate the variable
         fieldNameDeclaration.append(";\n");
+        if (!config.isUseLombok()) {
+            String setterGetter = makeSettersAndGetters(fieldName, variableDataType);
+            fieldNameDeclaration.append("\n").append(setterGetter);
+        }
 
-        String setterGetter = makeSettersAndGetters(fieldName, variableDataType);
-        fieldNameDeclaration.append("\n").append(setterGetter);
+
         return fieldNameDeclaration.toString();
+    }
+
+    public String determineVariableType(String sqlDataType) {
+        if (sqlDataType.equalsIgnoreCase("varchar") || sqlDataType.equalsIgnoreCase("text")) {
+            return "String ";
+        } else if (sqlDataType.equalsIgnoreCase("int") || sqlDataType.equalsIgnoreCase("serial")) {
+            return "int ";
+        } else if (sqlDataType.equalsIgnoreCase("bool")) {
+            return "boolean ";
+        } else {
+            return "String ";
+        }
+    }
+
+    public List<String> createVariableList(List<String> source, boolean isEntity) {
+        List<String> vars = new ArrayList<>();
+        for (String s : source) {
+            vars.add(createVariables(s, isEntity));
+        }
+        return vars;
     }
 
     private String makeSettersAndGetters(String variableName, String varibaleType) {
