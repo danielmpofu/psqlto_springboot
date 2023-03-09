@@ -2,6 +2,7 @@ package util;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.CaseUtils;
+import pojo.StartupConfig;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -10,12 +11,23 @@ import java.util.Scanner;
 
 public class PgSqlReader {
     private final String filePath;
-    private final String entityImports = "import java.util.Objects;\n" +
+    XmlParser xmlParser;
+    StartupConfig config;
+    String projectName;
+    String[] packageNameSplit;
+    private final String entityImports =
+            "import java.util.Objects;\n" +
             "import javax.persistence.Entity;\n" +
             "import javax.persistence.GeneratedValue;\n" +
             "import javax.persistence.Id;\n";
 
-    public PgSqlReader(String filePath) {
+    public PgSqlReader(String filePath) throws Exception {
+
+        xmlParser = new XmlParser();
+        config = xmlParser.readConfig();
+        projectName = config.getProjectPackage();
+        packageNameSplit = projectName.split("[.]");
+
         this.filePath = filePath;
     }
 
@@ -90,7 +102,6 @@ public class PgSqlReader {
 
     public void createPOJO(List<String> createStatements, boolean isEntity) throws Exception {
 
-
         for (int i = 0; i < createStatements.size(); i++) {
             String stm = createStatements.get(i).replace("create table ", "");
 
@@ -138,45 +149,58 @@ public class PgSqlReader {
 
         String fieldName = fieldProps[0];
         String fieldType = fieldProps[1];
-        String vt = "";
+        String variableDataType = "";
 
-        StringBuilder var = new StringBuilder();
-        var.append("private ");
+        //something like private String name;
+        StringBuilder fieldNameDeclaration = new StringBuilder();
 
+        /* todo looking for the id
+         some tables they come without the field named Id they be calling it maybe username or so ..
+         id  varchar(255) unique primary key not null,
+         can use anything with Unique identifier or primary key or anything..
+         still an open issue
+         can do better here
+        */
         if (fieldName.equalsIgnoreCase("id") && isEntity) {
-            var.append("@Id " +
-                    "@GeneratedValue " +
-                    "@Column(name = \"").append(fieldName).append("\", nullable = false)");
+            fieldNameDeclaration.append(" \n@Id \n" +
+                    "@GeneratedValue  \n" +
+                    "@Column(name = \"").append(fieldName).append("\", nullable = false) \n");
         }
 
+        fieldNameDeclaration.append("private ");
+
+        //looking for the appropriate java data type from the given sql data types
         if (fieldType.equalsIgnoreCase("varchar") || fieldType.equalsIgnoreCase("text")) {
-            var.append("String ");
-            vt = "String";
+            fieldNameDeclaration.append("String ");
+            variableDataType = "String ";
         } else if (fieldType.equalsIgnoreCase("int") || fieldType.equalsIgnoreCase("serial")) {
-            var.append("int ");
-            vt = "int";
+            fieldNameDeclaration.append("int ");
+            variableDataType = "int ";
         } else if (fieldType.equalsIgnoreCase("bool")) {
-            var.append("boolean ");
-            vt = "boolean";
+            fieldNameDeclaration.append("boolean ");
+            variableDataType = "boolean ";
         }
 
-        var.append(underscoreToCamelCase(fieldName, false));
-        var.append(";\n");
+        fieldNameDeclaration.append(underscoreToCamelCase(fieldName, false));
+        //terminate the variable
+        fieldNameDeclaration.append(";\n");
 
-        String setterGetter = makeSettersAndGetters(fieldName, vt);
-        var.append("\n").append(setterGetter);
-        return var.toString();
+        String setterGetter = makeSettersAndGetters(fieldName, variableDataType);
+        fieldNameDeclaration.append("\n").append(setterGetter);
+        return fieldNameDeclaration.toString();
     }
 
-    private String makeSettersAndGetters(String vN, String vt) {
+    private String makeSettersAndGetters(String variableName, String varibaleType) {
 
-        String setter = "public void set" + underscoreToCamelCase(vN, true)
-                + "( " + vt + " " + underscoreToCamelCase(vN, false) + " )" +
-                "{\n" + "this." + underscoreToCamelCase(vN, false) + " = "
-                + underscoreToCamelCase(vN, false) + ";\n}\n";
+        //create setter for each variable, take variable type and var name
+        String setter = "public void set" + underscoreToCamelCase(variableName, true)
+                + "( " + varibaleType + " " + underscoreToCamelCase(variableName, false) + " )" +
+                "{\n" + "this." + underscoreToCamelCase(variableName, false) + " = "
+                + underscoreToCamelCase(variableName, false) + ";\n}\n";
 
-        String getter = "public " + vt + " get" + underscoreToCamelCase(vN, true)
-                + "(){\nreturn " + underscoreToCamelCase(vN, false) + ";\n}\n";
+        //make getter
+        String getter = "public " + varibaleType + " get" + underscoreToCamelCase(variableName, true)
+                + "(){\nreturn " + underscoreToCamelCase(variableName, false) + ";\n}\n";
 
         return setter + "\n" + getter;
     }

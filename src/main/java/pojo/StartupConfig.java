@@ -4,6 +4,7 @@ public class StartupConfig {
     private final String databaseName;
     private final boolean generateControllers;
     private final boolean generateModel;
+    private final boolean useLombok;
     private final boolean generateConfigs;
     private final String projectPackage;
 
@@ -13,11 +14,12 @@ public class StartupConfig {
     public StartupConfig(String databaseName,
                          boolean generateControllers,
                          boolean generateModel,
-                         boolean generateConfigs,
+                         boolean useLombok, boolean generateConfigs,
                          String projectPackage, String inputFile) {
         this.databaseName = databaseName;
         this.generateControllers = generateControllers;
         this.generateModel = generateModel;
+        this.useLombok = useLombok;
         this.generateConfigs = generateConfigs;
         this.projectPackage = projectPackage;
         this.inputFile = inputFile;

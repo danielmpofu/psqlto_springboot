@@ -20,7 +20,7 @@ public class XmlParser {
 
     public StartupConfig readConfig() throws Exception {
         try {
-            File configInput = new File("config/settings.xml");
+            File configInput = new File("config"+File.separator+"settings.xml");
             StartupConfig config = null;
             //check if file has content
             if (configInput.length() != 0) {
@@ -40,6 +40,7 @@ public class XmlParser {
                             element.getElementsByTagName("database").item(0).getTextContent(),
                             Boolean.parseBoolean(element.getElementsByTagName("models").item(0).getTextContent()),
                             Boolean.parseBoolean(element.getElementsByTagName("controllers").item(0).getTextContent()),
+                            Boolean.parseBoolean(element.getElementsByTagName("useLombok").item(0).getTextContent()),
                             Boolean.parseBoolean(element.getElementsByTagName("configs").item(0).getTextContent()),
                             element.getElementsByTagName("projectPackage").item(0).getTextContent(),
                             element.getElementsByTagName("input").item(0).getTextContent()
@@ -49,7 +50,6 @@ public class XmlParser {
             } else {
                 throw new Exception("File cannot be of length zero");
             }
-
 
         } catch (Exception e) {
             System.out.println(e.toString());

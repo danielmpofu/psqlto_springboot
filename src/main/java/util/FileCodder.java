@@ -13,54 +13,88 @@ import java.nio.file.Paths;
 
 public class FileCodder {
 
-    public FileCodder(String input, String className) throws Exception {
-        String className1 = className.trim();
+    XmlParser xmlParser;
+    StartupConfig config;
+    String projectName;
+    String[] packageNameSplit;
 
-        XmlParser xmlParser = new XmlParser();
-        StartupConfig config = xmlParser.readConfig();
-        String projectName = config.getProjectPackage();
-        String[] p = projectName.split("[.]");
 
-        String parentDir = File.separator+"output" + p[2] + File.separator;
-        String codeDir = "src" + File.separator
-                + "main"
-                + File.separator
+    protected void generateSupportFiles(String parentDir) throws Exception {
+        Files.createDirectories(Paths.get(parentDir + "src"));
+        //pom.xml
+        String pomPath = parentDir + "src" + File.separator + "pom.xml";
+        createFile(pomPath);
+        writeFileContents(SupportFilesInfo.POM_CONTENTS, pomPath);
+
+        //readme.md
+        String readmePath = parentDir + "src" + File.separator + "readme.md";
+        createFile(readmePath);
+        writeFileContents(SupportFilesInfo.READMEMD_FILE, readmePath);
+
+        //readme.md
+        String mvnCmd = parentDir + "src" + File.separator + "mvnw.cmd";
+        createFile(mvnCmd);
+        writeFileContents(SupportFilesInfo.MVNCMD_FILE, mvnCmd);
+
+        //readme.md
+        String mvnwExec = parentDir + "src" + File.separator + "mvnw";
+        createFile(mvnwExec);
+        writeFileContents(SupportFilesInfo.MVNW_EXEC_FILE, mvnwExec);
+    }
+
+    protected void generateTestsFolder(String parentDir) throws Exception {
+        String parentCodeDir = "src" + File.separator + "test" + File.separator;
+        String codeDir = parentCodeDir
                 + "java"
                 + File.separator
-                + p[0]
+                + packageNameSplit[0]
                 + File.separator
-                +  p[1]
+                + packageNameSplit[1]
                 + File.separator
-                + p[2]
+                + packageNameSplit[2]
                 + File.separator;
 
-        String fileDir = "";
-        Path path;
+        String projectName = new XmlParser()
+                .readConfig()
+                .getProjectPackage()
+                .split("[.]")[2];
 
-        if (input.contains("@RequestMapping")) {
-            fileDir = "controllers"+ File.separator;
-        } else if (input.contains("@Entity")) {
-            fileDir = "entities"+ File.separator;
-        } else {
-            fileDir = "models"+ File.separator;
-        }
+        String fileDir = "";
+        //Path path;
 
         String filePath = parentDir + codeDir + fileDir;
 
-        path = Paths.get(filePath);
-        Files.createDirectories(path);
-        String packageName = ("package "
-                + config.getProjectPackage()
-                + "." + fileDir
-                + ";\n\n")
-                .replace(File.separator, "");
+        //path = ;
+        Files.createDirectories(Paths.get(filePath));
 
-        String javaCode = packageName+input;
-        String fileNameAndPath = filePath + className.trim() + ".java";
-        createFile(fileNameAndPath);
+        String packageName = ("package " + config.getProjectPackage() + ";\n\n");
 
-        writeJavaFile(javaCode, fileNameAndPath);
-        createMainFile(parentDir + codeDir + File.separator);
+        String testBasicImports = "import org.junit.jupiter.api.Test;\n" +
+                "import org.springframework.boot.test.context.SpringBootTest;\n";
+
+        StringBuilder testMainFileSB = new StringBuilder();
+        testMainFileSB.append(packageName)
+                .append("\n")
+                .append(testBasicImports)
+                .append("\n")
+                .append("@SpringBootTest\n")
+                .append("public class ")
+                .append(StringUtils.capitalize(projectName))
+                .append("Test {\n")
+                .append("\t@Test\n" +
+                        "\tvoid contextLoads() {\n" +
+                        "\t}\n" +
+                        "\n" +
+                        "}\n");
+
+        StringBuilder testFileNameSB = new StringBuilder();
+
+        testFileNameSB.append(StringUtils.capitalize(projectName))
+                .append("ApplicationTest")
+                .append(".java");
+
+        writeFileContents(testMainFileSB.toString(), filePath + (testFileNameSB.toString()));
+
     }
 
     private void createMainFile(String filePath) throws Exception {
@@ -97,20 +131,90 @@ public class FileCodder {
                 .append("Application")
                 .append(".java");
 
-//        try {
-//            FileWriter myWriter = new FileWriter(filePath + (fileNameSB.toString()));
-//            myWriter.write(mainFile.toString());
-//            myWriter.close();
-//
-//        } catch (IOException e) {
-//
-//            e.printStackTrace();
-//        }
-
-        writeJavaFile(mainFile.toString(), filePath + (fileNameSB.toString()));
+        writeFileContents(mainFile.toString(), filePath + (fileNameSB.toString()));
     }
 
-    private void writeJavaFile(String input, String fileNameAndPath) {
+    protected void generateResourcesFolder(String parentDir) throws Exception {
+        String parentResourcesDir = parentDir +File.separator+ "src" + File.separator + "main" + File.separator + "resources";
+        Files.createDirectories(Paths.get(parentResourcesDir));
+
+        //application.properties
+        String applicationDotPropertiesPath = parentResourcesDir + File.separator + "application.properties";
+        createFile(applicationDotPropertiesPath);
+        writeFileContents("#declare your props in here", applicationDotPropertiesPath);
+
+        //static
+        String staticDir = parentResourcesDir +File.separator+ "static" + File.separator + "init.txt";
+        createFile(staticDir);
+        Files.createDirectories(Paths.get(parentResourcesDir +File.separator+ "static"));
+        writeFileContents("//add all your static files in here", staticDir);
+
+        //templates
+        String templatesDir = parentResourcesDir +File.separator+ "templates" + File.separator + "init.txt";
+        createFile(templatesDir);
+        Files.createDirectories(Paths.get(parentResourcesDir +File.separator+ "templates"));
+        writeFileContents("//add all your templates files in here", templatesDir);
+    }
+
+    public FileCodder(String input, String className) throws Exception {
+        String className1 = className.trim();
+
+        xmlParser = new XmlParser();
+        config = xmlParser.readConfig();
+        projectName = config.getProjectPackage();
+        packageNameSplit = projectName.split("[.]");
+
+        String parentDir = "output" + File.separator + packageNameSplit[2] + File.separator;
+        String parentCodeDir = "src" + File.separator + "main" + File.separator;
+
+        String codeDir = parentCodeDir
+                + "java"
+                + File.separator
+                + packageNameSplit[0]
+                + File.separator
+                + packageNameSplit[1]
+                + File.separator
+                + packageNameSplit[2]
+                + File.separator;
+
+        String fileDir = "";
+        Path path;
+
+        //check and see where each file belongs here
+        if (input.contains("@RequestMapping")) {
+            fileDir = "controllers" + File.separator;
+        } else if (input.contains("@Entity")) {
+            fileDir = "entities" + File.separator;
+        } else if (input.contains("<?xml")) {
+            fileDir = "resources" + File.separator;
+        } else {
+            fileDir = "models" + File.separator;
+        }
+
+        String filePath = parentDir + codeDir + fileDir;
+
+        path = Paths.get(filePath);
+        Files.createDirectories(path);
+
+        String packageName = ("package "
+                + config.getProjectPackage()
+                + "." + fileDir
+                + ";\n\n")
+                .replace(File.separator, "");
+
+        String javaCode = packageName + input;
+        String fileNameAndPath = filePath + className.trim() + ".java";
+        createFile(fileNameAndPath);
+        writeFileContents(javaCode, fileNameAndPath);
+        createMainFile(parentDir + codeDir + File.separator);
+
+        generateSupportFiles(parentDir);
+        generateTestsFolder(parentDir);
+        generateResourcesFolder(parentDir);
+    }
+
+
+    private void writeFileContents(String input, String fileNameAndPath) {
         try {
             FileWriter myWriter = new FileWriter(fileNameAndPath);
             myWriter.write(input);
@@ -122,9 +226,9 @@ public class FileCodder {
         }
     }
 
-    private void createFile(String fileNameAndPath) {
-        File file = new File(fileNameAndPath);
+    private void createFile(String fileNameAndPath) throws Exception {
 
+        File file = new File(fileNameAndPath);
         try {
             boolean value = file.createNewFile();
             if (value) {

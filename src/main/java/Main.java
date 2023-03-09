@@ -11,7 +11,7 @@ public class Main {
 
     public static void main(String[] args) {
         init();
-//        PgSqlReader pgSqlReader;
+
         try {
             XmlParser xmlParser = new XmlParser();
             StartupConfig config = xmlParser.readConfig();
@@ -22,11 +22,6 @@ public class Main {
             throw new RuntimeException(e);
         }
     }
-
-
-
-
-
 
     private  static void logConfig( StartupConfig config){
         System.out.println("config db name: " + config.getDatabaseName());
